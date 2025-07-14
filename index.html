@@ -28,7 +28,7 @@
     </noscript>
 </head>
 <body>
-    <h1>Facebook Pixel Add to Cart Test</h1>
+    <h1>Facebook Pixel Test</h1>
 
     <!-- Form to collect Name and Email -->
     <form id="userDetailsForm">
@@ -44,6 +44,8 @@
         <button type="button" id="addToCartButton">Add to Cart</button>
 
         <button type="button" id="addToWishlistButton">Add to Wishlist</button>
+
+        <button type="button" id="subscribe">Subscribe</button>
     </form>
 
     <!-- JavaScript to trigger the addToCart event -->
@@ -64,9 +66,26 @@
                 content_category: 'Example Category',
                 content_ids: ['1234'],
                 content_type: 'product',
-                value: 50.00,
+                value: 24.99,
                 currency: 'USD',
                 user_name: name
+            });
+        });
+
+        document.getElementById('subscribe').addEventListener('click', function() {
+            // Get the values from the form
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            if (!name || !email) {
+                alert('Please enter both your name and email.');
+                return;
+            }
+
+            // Trigger Facebook Pixel custom event - subscribe with user data
+            fbq('trackCustom', 'Subscribe', {
+                user_name: name
+                user_email: email
             });
         });
     </script>
